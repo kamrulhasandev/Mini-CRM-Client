@@ -6,6 +6,7 @@ import DashboardHome from "../pages/DashbaordHome/DashboardHome";
 import NotFound from "../pages/NotFound";
 import ProtectedRoute from "../layout/ProtectedRoute";
 import Client from "../pages/Client/Client";
+import Project from "../pages/Project/Project";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "clients",
         element: <Client />,
+      },
+      {
+        path: "projects",
+        element: <Project />,
       },
     ],
   },

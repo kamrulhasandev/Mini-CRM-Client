@@ -5,6 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 import { FaUsers } from "react-icons/fa6";
+import { GoProject } from "react-icons/go";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -64,6 +65,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
             >
               <FaUsers className="w-5 h-5 mr-2" />
               Clients
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/projects"
+              className={({ isActive }) =>
+                `flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
+                  isActive ? "bg-gray-300" : ""
+                }`
+              }
+              onClick={() => toggleSidebar()}
+            >
+              <GoProject  className="w-5 h-5 mr-2" />
+              Projects
             </NavLink>
           </li>
         </ul>

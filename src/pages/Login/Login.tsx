@@ -15,7 +15,7 @@ interface IFormInput {
 }
 
 const Login = () => {
-  const [login, { error }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 

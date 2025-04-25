@@ -9,7 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const DashboardHome = () => {
   const { data, isLoading } = useGetDashboardDataQuery(undefined);
-
+  const statuses = ["IN_PROGRESS", "COMPLETED", "CANCELLED"];
   const dashboardData = data?.data;
   console.log(dashboardData);
 
@@ -42,13 +42,18 @@ const DashboardHome = () => {
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-4">Projects by Status</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {dashboardData?.projectsByStatus?.map((item: any) => (
-            <StatusCard
-              key={item.status}
-              status={item.status}
-              count={item.count}
-            />
-          ))}
+          {statuses.map((status) => {
+            const matched = dashboardData?.projectsByStatus?.find(
+              (item: any) => item.status === status
+            );
+            return (
+              <StatusCard
+                key={status}
+                status={status}
+                count={matched?.count ?? 0}
+              />
+            );
+          })}
         </div>
       </div>
 
