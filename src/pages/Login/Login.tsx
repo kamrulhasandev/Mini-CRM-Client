@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
+import { toast } from "sonner";
 
 interface IFormInput {
   email: string;
@@ -10,15 +15,36 @@ interface IFormInput {
 }
 
 const Login = () => {
+  const [login, { error }] = useLoginMutation();
+
+  const dispatch = useAppDispatch();
+
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      const userInfo = { email: data.email, password: data.password };
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.accessToken);
+
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+
+      navigate("/dashboard");
+    } catch (error: unknown) {
+      console.error("Login failed", error);
+
+      const errMsg =
+        (error as { data?: { message?: string } })?.data?.message ||
+        "Login failed";
+
+      toast.error(errMsg);
+    }
   };
 
   return (

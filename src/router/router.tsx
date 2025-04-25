@@ -4,6 +4,7 @@ import Register from "../pages/Register/Register";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardHome from "../pages/DashbaordHome/DashboardHome";
 import NotFound from "../pages/NotFound";
+import ProtectedRoute from "../layout/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
