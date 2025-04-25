@@ -4,6 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
+import { FaUsers } from "react-icons/fa6";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -39,6 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
           <li>
             <NavLink
               to="/dashboard"
+              end
               className={({ isActive }) =>
                 `flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
                   isActive ? "bg-gray-300" : ""
@@ -48,6 +50,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
             >
               <MdSpaceDashboard className="w-5 h-5 mr-2" />
               Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/clients"
+              className={({ isActive }) =>
+                `flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
+                  isActive ? "bg-gray-300" : ""
+                }`
+              }
+              onClick={() => toggleSidebar()}
+            >
+              <FaUsers className="w-5 h-5 mr-2" />
+              Clients
             </NavLink>
           </li>
         </ul>
