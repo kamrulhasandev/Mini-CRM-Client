@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { FaTimes } from "react-icons/fa";
 
 interface ClientType {
   id: string;
@@ -126,16 +127,10 @@ const EditProjectModal = ({
           </div>
 
           <div className="flex justify-end gap-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-sm"
-            >
-              Cancel
-            </button>
+            
             <button
               type="submit"
-              className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white text-sm"
+               className="bg-[#3b82f6] text-white px-6 py-2 rounded-md hover:[#2563eb] transition-colors duration-150 w-full cursor-pointer"
             >
               Save Changes
             </button>
@@ -144,9 +139,9 @@ const EditProjectModal = ({
 
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-2 p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-150 cursor-pointer"
         >
-          ✕
+          <FaTimes className="w-5 h-5" />
         </button>
       </div>
     </div>

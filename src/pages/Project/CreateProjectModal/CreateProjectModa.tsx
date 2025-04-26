@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { FaTimes } from "react-icons/fa";
 
 interface ClientType {
   id: string;
@@ -29,7 +30,12 @@ const statusOptions = [
   { label: "Cancelled", value: "CANCELLED" },
 ];
 
-const CreateProjectModal = ({ isOpen, onClose, clients, onSubmit }: CreateProjectModalProps) => {
+const CreateProjectModal = ({
+  isOpen,
+  onClose,
+  clients,
+  onSubmit,
+}: CreateProjectModalProps) => {
   const { register, handleSubmit, control, reset } = useForm<FormData>({
     defaultValues: {
       status: "IN_PROGRESS",
@@ -39,7 +45,7 @@ const CreateProjectModal = ({ isOpen, onClose, clients, onSubmit }: CreateProjec
   const handleFormSubmit = (data: FormData) => {
     const formattedData = {
       ...data,
-      budget: parseFloat(data.budget), 
+      budget: parseFloat(data.budget),
       deadline: new Date(data.deadline).toISOString(),
     };
     onSubmit(formattedData);
@@ -56,11 +62,18 @@ const CreateProjectModal = ({ isOpen, onClose, clients, onSubmit }: CreateProjec
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md relative shadow-lg">
-        <h2 className="text-xl font-bold mb-4">Add New Project</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900/60 z-50 p-4">
+      <div className="bg-white rounded-lg p-4 w-full max-w-md relative shadow-lg">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h2 className="text-xl font-bold text-gray-900">Create Client</h2>
+          <button
+            onClick={onClose}
+            className="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-150 cursor-pointer"
+          >
+            <FaTimes className="w-5 h-5" />
+          </button>
+        </div>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
-
           {/* Title */}
           <div>
             <label className="block mb-1 text-sm font-medium">Title</label>
@@ -93,29 +106,6 @@ const CreateProjectModal = ({ isOpen, onClose, clients, onSubmit }: CreateProjec
             />
           </div>
 
-          {/* Client Select */}
-          <div>
-            <label className="block mb-1 text-sm font-medium">Select Client</label>
-            <Controller
-              control={control}
-              name="clientId"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <select
-                  {...field}
-                  className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select a client</option>
-                  {clients.map((client) => (
-                    <option key={client.id} value={client.id}>
-                      {client.name}
-                    </option>
-                  ))}
-                </select>
-              )}
-            />
-          </div>
-
           {/* Status */}
           <div>
             <label className="block mb-1 text-sm font-medium">Status</label>
@@ -137,31 +127,44 @@ const CreateProjectModal = ({ isOpen, onClose, clients, onSubmit }: CreateProjec
             />
           </div>
 
+          {/* Client Select */}
+          <div>
+            <label className="block mb-1 text-sm font-medium">
+              Select Client
+            </label>
+            <Controller
+              control={control}
+              name="clientId"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select a client</option>
+                  {clients.map((client) => (
+                    <option key={client.id} value={client.id}>
+                      {client.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+            />
+          </div>
+
+          
+
           {/* Buttons */}
-          <div className="flex justify-end gap-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-sm"
-            >
-              Cancel
-            </button>
+          <div className="pt-4">
+           
             <button
               type="submit"
-              className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white text-sm"
+               className="bg-[#3b82f6] text-white px-6 py-2 rounded-md hover:[#2563eb] transition-colors duration-150 w-full cursor-pointer"
             >
               Create
             </button>
           </div>
         </form>
-
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-        >
-          ✕
-        </button>
       </div>
     </div>
   );

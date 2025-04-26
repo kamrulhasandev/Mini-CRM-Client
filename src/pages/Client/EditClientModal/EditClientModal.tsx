@@ -53,7 +53,7 @@ const EditClientModal: React.FC<EditClientModalProps> = ({
           <h2 className="text-xl font-bold text-gray-900">Edit Client</h2>
           <button
             onClick={onClose}
-            className="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-150"
+            className="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-150 cursor-pointer"
           >
             <FaTimes className="w-5 h-5" />
           </button>
@@ -172,10 +172,10 @@ const EditClientModal: React.FC<EditClientModalProps> = ({
           </div>
 
           {/* Submit Button */}
-          <div className="pt-4">
+          <div className="pt-2">
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-150"
+             className="bg-[#3b82f6] text-white px-6 py-2 rounded-md hover:[#2563eb] transition-colors duration-150 w-full cursor-pointer"
             >
               Update Client
             </button>
