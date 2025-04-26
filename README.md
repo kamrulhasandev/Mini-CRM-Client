@@ -4,6 +4,20 @@ Manage clients, projects, interaction logs, and reminders — all in one simple 
 
 Built with **TypeScript**, **React**, **Express/NestJS**, and **PostgreSQL**, focusing on modular structure, security, and clean user experience.
 
+
+---
+
+## Live Site
+
+🔗 [Visit the Mini-CRM](https://mini-crm-client-lx9e.vercel.app/login)
+
+---
+
+## Test Login Information
+
+- **Email:** `kamrul@gmail.com`
+- **Password:** `123456`
+
 ---
 
 ## Tech Stack
@@ -41,6 +55,14 @@ Built with **TypeScript**, **React**, **Express/NestJS**, and **PostgreSQL**, fo
     ```bash
     npm start
     ```
+
+---
+
+## ERD (Entity Relationship Diagram)
+
+![Mini-CRM ERD](https://i.ibb.co.com/cXgCwcGY/erd.png)
+
+---
 
 ## Approach and Decisions
 
