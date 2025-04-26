@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# Mini-CRM for Freelancers
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Manage clients, projects, interaction logs, and reminders — all in one simple web application.
 
-Currently, two official plugins are available:
+Built with **TypeScript**, **React**, **Express/NestJS**, and **PostgreSQL**, focusing on modular structure, security, and clean user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Frontend:**
+- React.js (Vite)
+- TypeScript
+- TailwindCSS
+- React Hook Form + Zod (Form validation)
+- Redux
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Dev Tools:**
+- ESLint + Prettier (Code formatting)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/kamrulhasandev/mini-crm-client
+    cd mini-crm-client
+    ```
+
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Set up the environment variables (see [Environment Variables](#environment-variables)).
+
+4. Start the server:
+    ```bash
+    npm start
+    ```
+
+## Approach and Decisions
+
+**Modular Backend:**  
+Used modular MVC pattern to separate controllers, services, and repositories for better maintainability and scalability.
+
+**Prisma ORM:**  
+Selected Prisma for its type safety, schema migrations, and simple querying syntax.
+
+**Authentication:**  
+Implemented JWT-based authentication with role-based protected routes (user-specific data isolation).
+
+**Form Validation:**  
+Used Zod on both client and server side to ensure consistent and reliable validation.
+
+**UI/UX:**  
+Designed a simple, clean, responsive UI using TailwindCSS with dark mode support.
+
+**API Security:**  
+All routes protected by JWT middleware and user-specific data access enforced at the database query level.
+
+**Frontend State:**  
+Managed form states and API interactions efficiently with React Hook Form and Axios.
+
+**Responsiveness:**  
+Built mobile-first, ensuring a consistent experience across all screen sizes.
