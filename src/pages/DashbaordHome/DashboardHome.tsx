@@ -6,16 +6,37 @@ import StatusCard from "./StatusCard/StatusCard";
 import ReminderList from "./ReminderList/ReminderList";
 
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { useGetAllClientsQuery } from "../../redux/features/client/clientAPI";
+import { useCreateReminderMutation } from "../../redux/features/reminder/reminderApi";
+import { useState } from "react";
+import { toast } from "sonner";
+import CreateReminderModal from "./CreateReminderModal/CreateReminderModal";
 
 const DashboardHome = () => {
   const { data, isLoading } = useGetDashboardDataQuery(undefined);
+  const { data: clients } = useGetAllClientsQuery(undefined);
+  const [createReminder] = useCreateReminderMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const statuses = ["IN_PROGRESS", "COMPLETED", "CANCELLED"];
   const dashboardData = data?.data;
+  const clientData = clients?.data;
   console.log(dashboardData);
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  const handleCreateReminder = async (formData: any) => {
+    try {
+      const res = await createReminder(formData);
+      if (res?.data?.success) {
+        toast.success("Reminder created successfully!");
+        setIsModalOpen(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="p-4 md:p-6">
@@ -57,9 +78,24 @@ const DashboardHome = () => {
         </div>
       </div>
 
+      <CreateReminderModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleCreateReminder}
+        clients={clientData}
+      />
+
       {/* Reminders List */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">Upcoming Reminders</h2>
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold ">Upcoming Reminders</h2>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-[#3b82f6] text-white font-semibold px-5 py-2 rounded-md hover:bg-[#2563eb] transition-colors duration-150"
+          >
+            Add Reminder
+          </button>
+        </div>
         <ReminderList reminders={dashboardData?.remindersDueSoon || []} />
       </div>
     </div>

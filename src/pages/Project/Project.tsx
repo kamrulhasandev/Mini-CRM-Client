@@ -14,6 +14,7 @@ import { FaEdit } from "react-icons/fa";
 import { toast } from "sonner";
 import CreateProjectModal from "./CreateProjectModal/CreateProjectModa";
 import EditProjectModal from "./EditClientModal/EditClientModal";
+import formatDate from "../../utils/formateDate";
 
 const Project = () => {
   const { data, isLoading } = useGetAllProjectsQuery(undefined);
@@ -160,7 +161,7 @@ const Project = () => {
                       ${project.budget}
                     </td>
                     <td className="px-4 py-3 text-sm md:px-6">
-                      {project.deadline}
+                      {formatDate(project.deadline)}
                     </td>
                     <td className="px-4 py-3 text-sm md:px-6">
                       {project.Client?.name}

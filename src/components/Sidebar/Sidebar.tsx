@@ -6,6 +6,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 import { FaUsers } from "react-icons/fa6";
 import { GoProject } from "react-icons/go";
+import { AiOutlineInteraction } from "react-icons/ai";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -77,8 +78,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
               }
               onClick={() => toggleSidebar()}
             >
-              <GoProject  className="w-5 h-5 mr-2" />
+              <GoProject className="w-5 h-5 mr-2" />
               Projects
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/interaction-logs"
+              className={({ isActive }) =>
+                `flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
+                  isActive ? "bg-gray-300" : ""
+                }`
+              }
+              onClick={() => toggleSidebar()}
+            >
+              <AiOutlineInteraction className="w-5 h-5 mr-2" />
+              Interaction Logs
             </NavLink>
           </li>
         </ul>

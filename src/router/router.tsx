@@ -7,6 +7,7 @@ import NotFound from "../pages/NotFound";
 import ProtectedRoute from "../layout/ProtectedRoute";
 import Client from "../pages/Client/Client";
 import Project from "../pages/Project/Project";
+import InteractionLogs from "../pages/InteractionLogs/InteractionLogs";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "projects",
         element: <Project />,
+      },
+      {
+        path: "interaction-logs",
+        element: <InteractionLogs />,
       },
     ],
   },
